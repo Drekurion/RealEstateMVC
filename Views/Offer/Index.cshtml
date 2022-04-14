@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Nieruchomości.Models.Offer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfferType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstateType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfferId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfferType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstateType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.OfferId  }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.OfferId  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.OfferId  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
