@@ -1,31 +1,26 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Nieruchomości.Models;
-using Nieruchomości.Repositories;
+using RealEstateMVC.Models;
+using RealEstateMVC.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nieruchomości.Controllers
+namespace RealEstateMVC.Controllers
 {
 	public class OfferController : Controller
 	{
 		private readonly IOfferRepository offerRepository;
-		private static IList<Offer> offers = new List<Offer>()
-		{
-			new Offer{ OfferId = 1, OfferType = "W", EstateType = "M", Number = "MW-1", Area = 90, Price = 367000 },
-
-		};
 		public OfferController(IOfferRepository offerRepository)
 		{
 			this.offerRepository = offerRepository;
 		}
 
 		// GET: Offer
-		public ActionResult Index()
+		public ActionResult Index(int? page)
 		{
-			return View(offerRepository.GetAll());
+			return View(offerRepository.GetPage(page ?? 1));
 		}
 
 		// GET: Offer/Details/5

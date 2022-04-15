@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Nieruchomości.Models;
+using RealEstateMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nieruchomości.Repositories
+namespace RealEstateMVC.Repositories
 {
 	public class OfferRepository : IOfferRepository
 	{
@@ -15,10 +15,13 @@ namespace Nieruchomości.Repositories
 			this.context = context;
 		}
 
-		public IList<Offer> GetAll()
-		{
-			return context.Offers.ToList();
-		}
+		public PaginatedList<Offer> GetPage(int currentPage)
+        {
+			int pageSize = 20;
+			var offers = context.Offers.AsNoTracking().OrderBy(x => x.OfferId);
+			PaginatedList<Offer> result = PaginatedList<Offer>.Create(offers, currentPage, pageSize);
+			return result;
+        }
 
 		public Offer Get(int offerId)
 		{

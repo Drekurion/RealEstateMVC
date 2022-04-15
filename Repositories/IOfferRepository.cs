@@ -1,14 +1,14 @@
-﻿using Nieruchomości.Models;
+﻿using RealEstateMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nieruchomości.Repositories
+namespace RealEstateMVC.Repositories
 {
 	public interface IOfferRepository
 	{
-		public IList<Offer> GetAll();
+		public PaginatedList<Offer> GetPage(int currentPage);
 		public Offer Get(int offerId);
 		void Add(Offer offer);
 		void Update(int offerId, Offer offer);

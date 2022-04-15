@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Nieruchomości.Models;
-using Nieruchomości.Repositories;
+using RealEstateMVC.Models;
+using RealEstateMVC.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nieruchomości
+namespace RealEstateMVC
 {
 	public class Startup
 	{
