@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(x => x.GetEnumerator().Current.OfferType)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["OfferTypeSortParam"]" asp-route-page="@Model.PageIndex">@Html.DisplayNameFor(x => x.GetEnumerator().Current.OfferType)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(x => x.GetEnumerator().Current.EstateType)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["EstateTypeSortParam"]" asp-route-page="@Model.PageIndex">@Html.DisplayNameFor(x => x.GetEnumerator().Current.EstateType)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(x => x.GetEnumerator().Current.Number)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NumberSortParam"]" asp-route-page="@Model.PageIndex">@Html.DisplayNameFor(x => x.GetEnumerator().Current.Number)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(x => x.GetEnumerator().Current.Area)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AreaSortParam"]" asp-route-page="@Model.PageIndex">@Html.DisplayNameFor(x => x.GetEnumerator().Current.Area)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(x => x.GetEnumerator().Current.Price)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParam"]" asp-route-page="@Model.PageIndex">@Html.DisplayNameFor(x => x.GetEnumerator().Current.Price)</a>
             </th>
             <th></th>
         </tr>
@@ -64,7 +64,7 @@
     }
     <ul class = "pagination">
         <li class="@hasPreviousPage">
-            <a class="page-link" asp-controller="Offer" asp-action="Index" asp-route-page="@(Model.PageIndex - 1)" aria-label="Previous">
+            <a class="page-link" asp-controller="Offer" asp-action="Index" asp-route-page="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["CurrentSort"]" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
             </a>
@@ -73,13 +73,13 @@
         {
             string isActive = (i == Model.PageIndex) ? "page-item active" : "page-item";
             <li class="@isActive">
-                <a class="page-link" asp-controller="Offer" asp-action="Index" asp-route-page="@i">
+                <a class="page-link" asp-controller="Offer" asp-action="Index" asp-route-page="@i" asp-route-sortOrder="@ViewData["CurrentSort"]">
                     @i
                 </a>
             </li>
         }
         <li class="@hasNextPage">
-            <a class="page-link" asp-controller="Offer" asp-action="Index" asp-route-page="@(Model.PageIndex + 1)" aria-label="Next">
+            <a class="page-link" asp-controller="Offer" asp-action="Index" asp-route-page="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["CurrentSort"]" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
             </a>

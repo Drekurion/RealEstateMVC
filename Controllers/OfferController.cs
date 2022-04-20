@@ -15,11 +15,50 @@ namespace RealEstateMVC.Controllers
 		}
 
 		// GET: Offer
-		public async Task<IActionResult> Index(int? page)
+		public async Task<IActionResult> Index(string sortOrder, int? page)
 		{
-			var offers = from s in context.Offers select s;
+			ViewData["CurrentSort"] = sortOrder;
+			ViewData["NumberSortParam"] = string.IsNullOrEmpty(sortOrder) ? "Number_desc" : "";
+			ViewData["OfferTypeSortParam"] = sortOrder == "OfferType" ? "OfferType_desc" : "OfferType";
+			ViewData["EstateTypeSortParam"] = sortOrder == "EstateType" ? "EstateType_desc" : "EstateType";
+			ViewData["AreaSortParam"] = sortOrder == "Area" ? "Area_desc" : "Area";
+			ViewData["PriceSortParam"] = sortOrder == "Price" ? "Price_desc" : "Price";
+			var offers = from x in context.Offers select x;
+			switch(sortOrder)
+            {
+				case "Number_desc":
+					offers = offers.OrderByDescending(x => x.Number);
+					break;
+				case "OfferType":
+					offers = offers.OrderBy(x => x.OfferType);
+					break;
+				case "OfferType_desc":
+					offers = offers.OrderByDescending(x => x.OfferType);
+					break;
+				case "EstateType":
+					offers = offers.OrderBy(x => x.EstateType);
+					break;
+				case "EstateType_desc":
+					offers = offers.OrderByDescending(x => x.EstateType);
+					break;
+				case "Area":
+					offers = offers.OrderBy(x => x.Area);
+					break;
+				case "Area_desc":
+					offers = offers.OrderByDescending(x => x.Area);
+					break;
+				case "Price":
+					offers = offers.OrderBy(x => x.Price);
+					break;
+				case "Price_desc":
+					offers = offers.OrderByDescending(x => x.Price);
+					break;
+				default:
+					offers = offers.OrderBy(x => x.Number);
+					break;
+            }
 			int pageSize = 20;
-			return View(await PaginatedList<Offer>.CreateAsync(offers.OrderBy(x => x.Number).AsNoTracking(), page ?? 1, pageSize));
+			return View(await PaginatedList<Offer>.CreateAsync(offers.AsNoTracking(), page ?? 1, pageSize));
 		}
 
 		// GET: Offer/Details/5
