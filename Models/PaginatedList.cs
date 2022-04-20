@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RealEstateMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +23,10 @@ namespace RealEstateMVC.Models
 
         public bool HasNextPage => PageIndex < PageCount;
 
-        public static PaginatedList<T> Create(IQueryable<T> source, int pageIndex, int pageSize)
+        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
         {
-            int count = source.Count();
-            var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            int count = await source.CountAsync();
+            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }
